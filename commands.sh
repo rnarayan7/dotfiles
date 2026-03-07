@@ -21,6 +21,14 @@ alias gms="git status"
 # ------------------------------------------------------------
 # Dev tools
 # ------------------------------------------------------------
+claude-window() {
+  local dir="${1:-.}"
+  dir=$(cd "$dir" 2>/dev/null && pwd) || { echo "Directory not found: $1"; return 1; }
+
+  tmux new-window -c "$dir"
+  tmux send-keys "claude" Enter
+  tmux split-window -h -c "$dir"
+}
 
 
 # ------------------------------------------------------------
