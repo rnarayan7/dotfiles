@@ -16,7 +16,11 @@ alias gma="git add"
 alias gmcm="git commit -m"
 alias gmp="git push -f"
 alias gms="git status"
-
+alias gm="git"
+alias gmc="git checkout"
+alias gmcma="git commit --amend"
+alias gmpull="git pull"
+alias delbr="git branch -D"
 
 # ------------------------------------------------------------
 # Dev tools
