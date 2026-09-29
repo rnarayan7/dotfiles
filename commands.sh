@@ -27,9 +27,13 @@ alias delbr="git branch -D"
 # ------------------------------------------------------------
 claude-window() {
   local dir="$HOME/Documents/${1}"
+  if [[ ! -d "$dir" ]]; then
+    mkdir -p "$dir"
+    echo "Created directory: ~/Documents/$1"
+  fi
   dir=$(cd "$dir" 2>/dev/null && pwd) || { echo "Directory not found: ~/Documents/$1"; return 1; }
 
-  tmux new-window -c "$dir"
+  tmux new-window -n "${2:-$(basename "$dir")}" -c "$dir"
   tmux send-keys "claude" Enter
   tmux split-window -h -c "$dir"
 }
