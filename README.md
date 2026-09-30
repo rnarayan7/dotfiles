@@ -21,7 +21,7 @@ echo 'source "$HOME/Documents/personal/dotfiles/commands.sh"' >> ~/.zshrc
 
 # tmux
 echo 'source-file ~/Documents/personal/dotfiles/tmux/tmux.conf' > ~/.tmux.conf
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+brew install tpm
 ```
 
 Both lines point at the repo, so edits take effect directly with no copy step.
@@ -85,8 +85,12 @@ The `-c` bindings matter because tmux has no option for this. `default-path` was
 in 1.9 and nothing replaced it, so without `-c` a new pane inherits the *session's*
 working directory, which is fixed at session creation and never follows your `cd`s.
 
+TPM itself comes from Homebrew, and the config loads it from
+`/opt/homebrew/opt/tpm/share/tpm/tpm`. That's the Apple Silicon prefix; on an Intel Mac,
+change the `run` line to `/usr/local/opt/tpm/share/tpm/tpm`.
+
 Plugins aren't vendored here. TPM clones them into `~/.tmux/plugins/`, so a new machine
-needs the clone in the install step above, then `prefix + I` to fetch them.
+needs `brew install tpm` from the install step above, then `prefix + I` to fetch them.
 
 Reload after editing:
 
