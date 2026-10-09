@@ -78,7 +78,8 @@ What the config does:
 - splits and new windows open in the current pane's directory, via
   `-c "#{pane_current_path}"` on the `"`, `%`, and `c` bindings
 - `prefix : cl` opens a split running `claude`
-- darker background on the active pane, red status flag on a bell
+- darker background on the active pane
+- windows with a bell turn red in the status bar and in the window tree (`prefix + w`)
 - tmux-resurrect and tmux-continuum, saving every 15 min and restoring on start
 
 The `-c` bindings matter because tmux has no option for this. `default-path` was removed
