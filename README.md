@@ -8,6 +8,9 @@ Personal shell and tmux configuration for macOS.
 commands.sh        shell aliases and functions, sourced by ~/.zshrc
 tmux/
   tmux.conf        tmux config, sourced by ~/.tmux.conf
+claude/
+  install.sh       links skills into ~/.claude/skills
+  skills/<tag>/    Claude Code skills, grouped by tag
 ```
 
 ## Install
@@ -98,6 +101,32 @@ Reload after editing:
 ```sh
 tmux source-file ~/.tmux.conf
 ```
+
+## Claude skills
+
+Each skill lives in `claude/skills/<tag>/<name>/` and is symlinked to
+`~/.claude/skills/<name>`, so edits in the repo take effect directly. The folder is the
+tag. Claude Code sees a flat list of skills, and the tag only controls which machines get
+which skills.
+
+| Tag | Skills |
+|---|---|
+| `valkai` | `cwm`, `linear-recap`, `tmux-ticket` |
+| `personal` | none yet |
+
+Install on a new machine:
+
+```sh
+claude/install.sh valkai personal   # work laptop
+claude/install.sh personal          # personal machine
+```
+
+`install.sh` skips any existing path that is not a link, so it never overwrites a
+skill that another tool installed. Run it again after adding a skill, then run
+`/reload-skills` in open Claude sessions.
+
+Link single skill folders only, not all of `~/.claude/skills/`. Other tools also write
+there (the `aws-*` skills, the `synced` folder).
 
 ## Branches
 
