@@ -111,7 +111,7 @@ which skills.
 
 | Tag | Skills |
 |---|---|
-| `valkai` | `cwm`, `linear-recap`, `tmux-ticket` |
+| `valkai` | `cwm`, `linear-recap`, `tmux-recap`, `tmux-ticket` |
 | `personal` | none yet |
 
 Install on a new machine:
