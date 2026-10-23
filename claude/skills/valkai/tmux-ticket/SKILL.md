@@ -8,7 +8,7 @@ argument-hint: "[ticket-id | linear-url]"
 
 ## 1. Check for tmux
 
-Run `echo "$TMUX_PANE"`. If it is empty, the session is not inside tmux: tell the user and stop.
+Run `echo "$TMUX_PANE"` as its own command. If it is empty, the session is not inside tmux: tell the user and stop. Otherwise keep the pane ID it prints (e.g. `%88`) for step 4.
 
 ## 2. Find the ticket ID
 
@@ -30,11 +30,16 @@ If the Linear call fails, name the window `Claude <ID>` with no title and say th
 
 The name is `Claude <ID> <label>`.
 
-Target `$TMUX_PANE`, not the active window. The user may have a different window focused.
+Target the pane ID from step 1, not the active window. The user may have a different window focused.
+
+Pass the literal pane ID, not `$TMUX_PANE`, and run each command on its own. In a worktree-isolated session, the worktree guard refuses tmux commands that use a runtime variable.
 
 ```bash
-tmux rename-window -t "$TMUX_PANE" "Claude ENG-1234 arena attr filter"
-tmux set-option -w -t "$TMUX_PANE" allow-rename off
+tmux rename-window -t %88 "Claude ENG-1234 arena attr filter"
+```
+
+```bash
+tmux set-option -w -t %88 allow-rename off
 ```
 
 `rename-window` turns off `automatic-rename` for that window. `allow-rename off` stops programs from overwriting the name with terminal escape sequences.
