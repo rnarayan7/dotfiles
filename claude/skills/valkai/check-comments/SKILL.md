@@ -6,7 +6,7 @@ argument-hint: "[pr-number | pr-url | description of the PR]"
 
 # Check the latest comments on a PR
 
-Read-only. Never post, reply, resolve, or push from this skill. Draft replies and ask first.
+Never resolve threads, here or later: the user resolves every conversation. When you fix a comment after this skill, reply on its thread once the fix is pushed, in the user's voice, without asking first. Comments that need only a reply (no code change): draft and ask first.
 
 ## 1. Find the PR
 
@@ -48,10 +48,17 @@ If a bot body is long or HTML-heavy, fetch that one comment and strip tags:
 gh api repos/<owner>/<repo>/pulls/comments/<id> --jq '.body | gsub("<[^>]*>";"")'
 ```
 
+Checks that failed or are still running:
+```bash
+gh pr checks <n> --json name,state,link -q '.[] | select(.state!="SUCCESS" and .state!="SKIPPED") | "\(.state) \(.name) \(.link)"'
+```
+
+For each failed check, find the cause. Take the `job=` ID from its depot.dev link and run `depot ci diagnose --job <id>`. For a link that is not depot.dev, run `gh run view <run-id> --log-failed`.
+
 ## 3. Decide what is new
 
 - **Needs attention:** an unresolved thread whose last comment is not from the user, and any review or conversation comment newer than the user's last reply or push.
-- **Answered:** an unresolved thread where the user replied last. It probably only needs resolving.
+- **Answered:** an unresolved thread where the user replied last. The user resolves it; it needs no action.
 - **Outdated:** a thread on code that changed or no longer exists (`isOutdated`).
 - Skip `bugbot run` comments, the Linear linkback comment, and review-badge summaries with no findings.
 
@@ -74,4 +81,12 @@ Then one block per item, newest first:
 - **Suggested action:** a code change (what and where) or a reply.
 - **Draft reply:** in the user's voice: casual, short, lowercase start, no AI phrasing.
 
-End with what blocks merge (unresolved threads, missing approval, failing checks: `gh pr checks <n> --json name,state`), and offer to post the replies, resolve threads, or make the changes.
+Then one block per failed check:
+
+- **Check:** its name.
+- **Cause:** the error from the diagnosis, short.
+- **Fix:** the code change, label, or re-run that clears it.
+
+List running checks by name on one line.
+
+End with what blocks merge (unresolved threads, missing approval, failed checks), and offer to post the replies or make the changes.
