@@ -31,10 +31,10 @@ If the Slack plugin tools are missing, load the same tools from `mcp__claude_ai_
 
 ## 4. Answer
 
-Per person, at most 3 lines. Give times in my timezone, and add theirs when it differs.
+Per person, at most 3 lines. Give times in 12-hour format (`1:45 pm ET`), in my timezone, and add theirs when it differs.
 
 ```
-**Davis: busy** · Low-level Design interview until 16:45 ET (13:45 PT)
-- next free: 17:15–17:45 ET, then "share the offline eval" 17:45
-- Slack: no status · last message 12m ago · 11:20 PT local
+**Davis: busy** · Low-level Design interview until 4:45 pm ET (1:45 pm PT)
+- next free: 5:15–5:45 pm ET, then "share the offline eval" 5:45 pm
+- Slack: no status · last message 12m ago · 11:20 am PT local
 ```
