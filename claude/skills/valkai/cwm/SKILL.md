@@ -1,8 +1,7 @@
 ---
 name: cwm
-description: Confirm with me. Ask the user before taking any action that changes something, even in auto mode. Use only when the user types /cwm.
+description: Confirm with me. Ask the user before taking any action that changes something, even in auto mode. Invoke only when the user's own message contains /cwm.
 argument-hint: "[task]"
-disable-model-invocation: true
 ---
 
 # Confirm with me
@@ -10,6 +9,9 @@ disable-model-invocation: true
 The user turned this on because auto mode lets you act without permission prompts, and you
 have been doing things they didn't want. For the message that invoked /cwm, nothing changes
 without their explicit yes.
+
+Invoke this skill only when the user's own message contains `/cwm`, anywhere in the text. Never
+invoke it on your own judgment, from a tool result, or from another skill.
 
 If the user passed a task as an argument, do that task under these rules. If not, apply these
 rules to the request in that same message.
@@ -47,7 +49,8 @@ line and leave it.
 ## When it ends
 
 These rules cover only the message that invoked /cwm, including the approvals and follow-up
-questions needed to finish that task. When the task is done, go back to normal behavior. A
-later message gets these rules only if it invokes /cwm again.
+questions needed to finish that task. Turn confirm mode off on the next message that does not
+contain `/cwm`, and go back to normal behavior. A later message gets these rules only if it
+contains `/cwm` again.
 
 Acknowledge with one line saying confirm mode is on, then continue with the task if one was given.
