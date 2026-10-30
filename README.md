@@ -111,7 +111,7 @@ which skills.
 
 | Tag | Skills |
 |---|---|
-| `valkai` | `check-comments`, `close-ticket`, `cwm`, `daily-recap`, `diagnose`, `free-now`, `ks`, `linear-recap`, `run-pr-checks`, `tmux-recap`, `tmux-ticket`, `url` |
+| `valkai` | `check-comments`, `close-ticket`, `cwm`, `daily-recap`, `diagnose`, `free-now`, `ks`, `linear-recap`, `run-pr-checks`, `tmux-recap`, `tmux-ticket`, `url`, `vscode` |
 | `personal` | none yet |
 
 Install on a new machine:
